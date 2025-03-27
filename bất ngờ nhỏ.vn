@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư Tình Gửi Nguyễn Trà My</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            text-align: center;
+            margin: 0;
+            overflow: hidden;
+        }
+        .letter {
+            background: rgba(255, 255, 255, 0.9);
+            width: 60%;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            border: 2px solid #ff4d6d;
+            display: none;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+        }
+        .special-date {
+            font-size: 20px;
+            color: #ff2e63;
+            font-weight: bold;
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+        }
+        .hearts {
+            color: #ff4d6d;
+            font-size: 28px;
+        }
+        @keyframes falling {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        .falling-petals {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background-color: #ff4d6d;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: falling linear infinite;
+        }
+        h2 {
+            color: #ff2e63;
+            font-size: 32px;
+            text-shadow: 2px 2px 4px rgba(255, 0, 0, 0.3);
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+        }
+        .open-btn {
+            margin-top: 20px;
+            font-size: 20px;
+            background-color: #ff4d6d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h2>Thư Tình Gửi Nguyễn Trà My</h2>
+    <button class="open-btn" onclick="openLetter()">Mở ra</button>
+    <div class="letter" id="letter">
+        <h2>Gửi Nguyễn Trà My yêu dấu</h2>
+        <p class="hearts">❤️❤️❤️</p>
+        <p class="special-date" id="special-date">Ngày 4 tháng 2 năm 2025 - Ngày tình yêu bắt đầu 💖</p>
+        <p>
+            Em là ánh sáng trong trái tim anh, là ngọn lửa ấm áp sưởi ấm những ngày đông lạnh giá. Mỗi ngày trôi qua,
+            anh đều biết ơn vì có em bên cạnh, cùng chia sẻ niềm vui, nỗi buồn và những ước mơ. Tình yêu của anh dành
+            cho em không chỉ là những lời nói mà là những hành động chân thành, là sự quan tâm, lo lắng và yêu thương
+            vô tận. Em là cô gái tuyệt vời nhất mà anh từng gặp, và anh hứa sẽ luôn trân trọng từng khoảnh khắc bên em.
+            Chúc em luôn hạnh phúc, luôn xinh đẹp như những bông hoa nở rộ trong mùa xuân. Anh yêu em mãi mãi! ❤️
+        </p>
+        <p><strong>Yêu em mãi mãi,</strong></p>
+        <p><em>Người luôn yêu em</em></p>
+    </div>
+    <script>
+        function openLetter() {
+            let letter = document.getElementById('letter');
+            let specialDate = document.getElementById('special-date');
+            letter.style.display = 'block';
+            setTimeout(() => {
+                letter.style.opacity = '1';
+                letter.style.transform = 'scale(1)';
+                setTimeout(() => {
+                    specialDate.style.opacity = '1';
+                    specialDate.style.transform = 'translateY(0)';
+                }, 500);
+                let paragraphs = document.querySelectorAll('.letter p:not(.special-date)');
+                paragraphs.forEach((p, index) => {
+                    setTimeout(() => {
+                        p.style.opacity = '1';
+                        p.style.transform = 'translateY(0)';
+                    }, 800 + 500 * index);
+                });
+            }, 100);
+            document.querySelector('.open-btn').style.display = 'none';
+        }
+        function createPetal() {
+            let petal = document.createElement('div');
+            petal.classList.add('falling-petals');
+            document.body.appendChild(petal);
+            
+            let size = Math.random() * 12 + 5;
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size}px`;
+            petal.style.left = `${Math.random() * window.innerWidth}px`;
+            petal.style.animationDuration = `${Math.random() * 5 + 3}s`;
+            
+            setTimeout(() => { petal.remove(); }, 8000);
+        }
+        setInterval(createPetal, 200);
+    </script>
+</body>
+</html>
